@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.actonica.fitstore.R;
-import com.actonica.fitstore.SharedPrefsHelper;
+import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 
 public class WelcomeActivity extends AppCompatActivity {
 

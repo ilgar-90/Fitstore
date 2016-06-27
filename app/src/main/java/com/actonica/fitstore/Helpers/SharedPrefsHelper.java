@@ -1,4 +1,4 @@
-package com.actonica.fitstore;
+package com.actonica.fitstore.Helpers;
 
 import android.app.Activity;
 import android.content.Context;

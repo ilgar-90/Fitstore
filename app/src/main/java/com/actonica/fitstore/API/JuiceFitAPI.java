@@ -16,4 +16,7 @@ public interface JuiceFitAPI {
 
     @POST("/users/verify")
     Call<VerifyUserResponse> verifyUser(@Query("phone") String phone,  @Query("phone_code") String phone_code);
+
+    @GET("/categories")
+    Call<GetCategoriesResponse> getCategories(@Query("token") String token);
 }

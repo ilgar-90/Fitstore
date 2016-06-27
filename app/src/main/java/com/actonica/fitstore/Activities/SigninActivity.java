@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,9 +16,7 @@ import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
 import com.actonica.fitstore.R;
-import com.actonica.fitstore.SharedPrefsHelper;
-
-import java.util.List;
+import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -160,6 +157,7 @@ public class SigninActivity extends AppCompatActivity {
         progress.setMessage(message);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
+        progress.setCancelable(false);
         progress.setProgress(0);
         progress.show();
     }

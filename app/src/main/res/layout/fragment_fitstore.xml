@@ -3,9 +3,9 @@
     android:layout_height="match_parent"
     tools:context="com.actonica.fitstore.Fragments.FitStoreFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/categories"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="FRAGMENT FITSTORE!!!"/>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
