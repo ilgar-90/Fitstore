@@ -3,10 +3,12 @@ package com.actonica.fitstore.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class Program {
+public class Program implements Serializable {
 
     @SerializedName("id")
     @Expose

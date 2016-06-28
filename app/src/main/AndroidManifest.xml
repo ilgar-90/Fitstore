@@ -21,6 +21,10 @@
         </activity>
         <activity android:name=".Activities.MainActivity" >
         </activity>
+        <activity android:name=".Activities.CategoryActivity" >
+        </activity>
+        <activity android:name=".Activities.ProgramActivity" >
+        </activity>
     </application>
 
 </manifest>

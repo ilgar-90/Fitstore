@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/prog_avatar"
+        android:scaleType="centerCrop"
+            android:layout_marginTop="11dp"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:padding="5dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Введение в кроссфит"
+            android:id="@+id/program_title"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/program_parts_view"
+                android:layout_gravity="center|left"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:ellipsize="end"
+            android:maxLines = "4"
+            android:minLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            android:id="@+id/prog_description"
+            android:layout_marginBottom="5dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                layout="@layout/program_trains_count_view"
+                android:layout_gravity="center|left"
+                android:layout_weight="1" />
+
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/producer_view"
+                android:layout_gravity="end" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

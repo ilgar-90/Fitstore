@@ -1,6 +1,7 @@
 package com.actonica.fitstore.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actonica.fitstore.Activities.ProgramActivity;
 import com.actonica.fitstore.Helpers.ImgUrlResolver;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
@@ -22,12 +24,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class HorizontalProgramsAdapter extends RecyclerView.Adapter<HorizontalProgramsAdapter.SingleItemRowHolder> {
+public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.SingleItemRowHolder> {
 
     private List<Program> itemsList;
     private Context mContext;
 
-    public HorizontalProgramsAdapter(Context context, List<Program> itemsList) {
+    public ProgramsAdapter(Context context, List<Program> itemsList) {
         this.itemsList = itemsList;
         this.mContext = context;
     }
@@ -86,7 +88,9 @@ public class HorizontalProgramsAdapter extends RecyclerView.Adapter<HorizontalPr
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), program_title.getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, ProgramActivity.class);
+                    intent.putExtra("program", itemsList.get(getAdapterPosition()));
+                    mContext.startActivity(intent);
                 }
             });
 

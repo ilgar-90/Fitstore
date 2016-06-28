@@ -1,20 +1,19 @@
 package com.actonica.fitstore.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.actonica.fitstore.Activities.CategoryActivity;
 import com.actonica.fitstore.Models.Category;
 import com.actonica.fitstore.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,22 +45,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.It
 
         itemRowHolder.categoryTitle.setText(sectionName);
 
-        HorizontalProgramsAdapter itemListDataAdapter = new HorizontalProgramsAdapter(mContext, singleSectionItems);
+        ProgramsAdapter itemListDataAdapter = new ProgramsAdapter(mContext, singleSectionItems);
 
         itemRowHolder.programs_recycler_view.setHasFixedSize(true);
         itemRowHolder.programs_recycler_view.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.programs_recycler_view.setAdapter(itemListDataAdapter);
-
-
-
-
-
-       /* Glide.with(mContext)
-                .load(feedItem.getImageURL())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop()
-                .error(R.drawable.bg)
-                .into(feedListRowHolder.thumbView);*/
     }
 
     @Override
@@ -82,13 +70,18 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.It
             this.categoryTitle = (TextView) view.findViewById(R.id.category_title);
             this.programs_recycler_view = (RecyclerView) view.findViewById(R.id.programs_recycler_view);
             this.category_header = (LinearLayout) view.findViewById(R.id.category_header);
-
             this.category_header.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), categoryTitle.getText(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(mContext, CategoryActivity.class);
+                    intent.putExtra("category", dataList.get(getAdapterPosition()));
+                    mContext.startActivity(intent);
+
+                    //Toast.makeText(v.getContext(), dataList.get(getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
 
     }
