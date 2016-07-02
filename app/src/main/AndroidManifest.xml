@@ -3,6 +3,9 @@
     package="com.actonica.fitstore" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,6 +13,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
+        <service android:name=".Helpers.DownloadService"/>
+
         <activity android:name=".Activities.WelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +30,8 @@
         <activity android:name=".Activities.CategoryActivity" >
         </activity>
         <activity android:name=".Activities.ProgramActivity" >
+        </activity>
+        <activity android:name=".Activities.ProducerActivity" >
         </activity>
     </application>
 

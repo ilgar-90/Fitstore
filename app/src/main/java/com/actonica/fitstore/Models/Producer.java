@@ -4,6 +4,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ilgar on 27.06.2016.
@@ -24,10 +26,13 @@ public class Producer implements Serializable {
     private String nickname;
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("avatar")
     @Expose
     private String avatar;
+    @SerializedName("programs")
+    @Expose
+    private List<Program> programs = new ArrayList<Program>();
 
     /**
      *
@@ -106,7 +111,7 @@ public class Producer implements Serializable {
      * @return
      * The description
      */
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -115,7 +120,7 @@ public class Producer implements Serializable {
      * @param description
      * The description
      */
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -135,6 +140,24 @@ public class Producer implements Serializable {
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    /**
+     *
+     * @return
+     * The programs
+     */
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    /**
+     *
+     * @param programs
+     * The programs
+     */
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
     }
 
 }

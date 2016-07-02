@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actonica.fitstore.Activities.ProducerActivity;
 import com.actonica.fitstore.Activities.ProgramActivity;
 import com.actonica.fitstore.Helpers.ImgUrlResolver;
 import com.actonica.fitstore.Models.Program;
@@ -72,6 +74,7 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.Single
         protected ImageView program_avatar;
         protected CircleImageView prod_avatar;
         protected TextView prod_nick;
+        protected LinearLayout producer_view;
 
 
 
@@ -83,6 +86,7 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.Single
             this.program_avatar = (ImageView) view.findViewById(R.id.prog_avatar);
             this.prod_avatar = (CircleImageView) view.findViewById(R.id.prod_avatar);
             this.prod_nick = (TextView) view.findViewById(R.id.prod_nick);
+            this.producer_view = (LinearLayout)view.findViewById(R.id.producer_view);
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +98,14 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.Single
                 }
             });
 
+            this.producer_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ProducerActivity.class);
+                    intent.putExtra("producer", itemsList.get(getAdapterPosition()).getProducer());
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
 

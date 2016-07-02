@@ -3,6 +3,8 @@ package com.actonica.fitstore.API;
 import android.content.Context;
 
 import com.actonica.fitstore.ApiResponsesGson.GetCategoriesResponse;
+import com.actonica.fitstore.ApiResponsesGson.GetProducerProgramsResponse;
+import com.actonica.fitstore.ApiResponsesGson.GetRelatedProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
 import com.actonica.fitstore.Helpers.SharedPrefsHelper;
@@ -70,6 +72,38 @@ public class JuiceFitAPIHandler {
 
 
         Call<GetCategoriesResponse> call = juiceFitAPI.getCategories(getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void getRelatedPrograms(String program_id, Context context, Callback<GetRelatedProgramsResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<GetRelatedProgramsResponse> call = juiceFitAPI.getRelatedPrograms(program_id, getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void getProducerPrograms(String producer_id, Context context, Callback<GetProducerProgramsResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<GetProducerProgramsResponse> call = juiceFitAPI.getProducerPrograms(producer_id, getToken(context));
         //asynchronous call
         call.enqueue(callback);
     }

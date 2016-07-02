@@ -10,14 +10,14 @@
         android:scaleType="centerCrop"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:src="@drawable/ic_list_black_18dp"
+        android:src="@drawable/ic_event_note_black_18dp"
         android:layout_gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3 trevirovki"
-        android:id="@+id/trains_count"
+        android:text="3 raza v nedelyu"
+        android:id="@+id/schedule"
         android:layout_gravity="center_vertical"
         android:textSize="12dp"
         android:paddingLeft="3dp"
