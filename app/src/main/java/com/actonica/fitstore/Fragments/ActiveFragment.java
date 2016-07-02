@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.actonica.fitstore.CustomViews.CarouselPagerAdapter;
 import com.actonica.fitstore.R;
+import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class ActiveFragment extends Fragment {
@@ -45,14 +46,16 @@ public class ActiveFragment extends Fragment {
         int pageMargin = ((metrics.widthPixels / 4) * 2);
         pager.setPageMargin(-pageMargin);
 
-        /*adapter = new CarouselPagerAdapter(this, getChildFragmentManager());
+        adapter = new CarouselPagerAdapter(this, getChildFragmentManager());
         pager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        pager.addOnPageChangeListener(adapter);*/
+        pager.addOnPageChangeListener(adapter);
 
-        TitlePageIndicator titleIndicator = (TitlePageIndicator)v.findViewById(R.id.indicator);
-        titleIndicator.setViewPager(pager);
+        CirclePageIndicator indicator = (CirclePageIndicator)v.findViewById(R.id.indicator);
+        //mIndicator = indicator;
+        indicator.setViewPager(pager);
+        indicator.setSnap(true);
 
         // Set current item to the middle page so we can fling to both
         // directions left and right
