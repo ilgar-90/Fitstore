@@ -1,10 +1,7 @@
 package com.actonica.fitstore.Activities;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.os.ResultReceiver;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,15 +17,12 @@ import android.widget.Toast;
 import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.Adapters.ProgramsAdapter;
 import com.actonica.fitstore.ApiResponsesGson.GetRelatedProgramsResponse;
-import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
-import com.actonica.fitstore.Helpers.DownloadService;
-import com.actonica.fitstore.Helpers.ImgUrlResolver;
+import com.actonica.fitstore.Downloader.Downloader;
+import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -40,22 +34,6 @@ import retrofit2.Response;
 public class ProgramActivity extends AppCompatActivity {
 
     Button download_button;
-
-    private class DownloadReceiver extends ResultReceiver {
-        public DownloadReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            super.onReceiveResult(resultCode, resultData);
-            if (resultCode == DownloadService.UPDATE_PROGRESS) {
-                int progress = resultData.getInt("progress");
-                download_button.setText(Integer.toString(progress));
-            }
-        }
-    }
-
     RecyclerView related_rv;
     LinearLayout related_block;
 
@@ -80,14 +58,14 @@ public class ProgramActivity extends AppCompatActivity {
 
         ImageView avatar = (ImageView)findViewById(R.id.prog_avatar);
         Glide.with(this)
-                .load(ImgUrlResolver.getProgramAvatar(program.getCover()))
+                .load(UrlResolver.getProgramAvatar(program.getCover()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(avatar);
 
 
         ImageView producer_avatar = (ImageView)findViewById(R.id.prod_avatar);
         Glide.with(this)
-                .load(ImgUrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
+                .load(UrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(producer_avatar);
 
@@ -127,10 +105,7 @@ public class ProgramActivity extends AppCompatActivity {
         download_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProgramActivity.this, DownloadService.class);
-                intent.putExtra("url", "http://212.36.231.71/Uploads/chrome.zip");
-                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
-                startService(intent);
+                Downloader.getInstance(ProgramActivity.this).startDownload(program);
             }
         });
 

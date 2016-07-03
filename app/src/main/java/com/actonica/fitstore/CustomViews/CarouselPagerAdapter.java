@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 
 import com.actonica.fitstore.Activities.MainActivity;
 import com.actonica.fitstore.Fragments.ActiveFragment;
+import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
  */
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
-    List<String> data;
+    List<Program> data;
 
-    public CarouselPagerAdapter(FragmentManager fm, List<String> data) {
+    public CarouselPagerAdapter(FragmentManager fm, List<Program> data) {
         super(fm);
         this.data = data;
     }

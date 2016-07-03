@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actonica.fitstore.Activities.ProducerActivity;
 import com.actonica.fitstore.Activities.ProgramActivity;
-import com.actonica.fitstore.Helpers.ImgUrlResolver;
+import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 import com.bumptech.glide.Glide;
@@ -53,12 +52,12 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.Single
 
 
        Glide.with(mContext)
-               .load(ImgUrlResolver.getProgramAvatar(program.getCover()))
+               .load(UrlResolver.getProgramAvatar(program.getCover()))
                .diskCacheStrategy(DiskCacheStrategy.ALL)
                .into(holder.program_avatar);
 
         Glide.with(mContext)
-                .load(ImgUrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
+                .load(UrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.prod_avatar);
     }

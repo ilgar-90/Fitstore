@@ -1,7 +1,6 @@
 package com.actonica.fitstore.Activities;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
@@ -23,7 +21,7 @@ import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.Adapters.ExtendedProgramsAdapter;
 import com.actonica.fitstore.ApiResponsesGson.GetProducerProgramsResponse;
 import com.actonica.fitstore.DividerItemDecoration;
-import com.actonica.fitstore.Helpers.ImgUrlResolver;
+import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Producer;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
@@ -101,7 +99,7 @@ public class ProducerActivity extends AppCompatActivity implements AppBarLayout.
             prod_about_card.setVisibility(View.VISIBLE);
         }
         Glide.with(this)
-                .load(ImgUrlResolver.getProducerAvatar(producer.getAvatar()))
+                .load(UrlResolver.getProducerAvatar(producer.getAvatar()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(prod_avatar);
 

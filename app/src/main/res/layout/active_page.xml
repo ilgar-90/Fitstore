@@ -13,7 +13,87 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="10dp">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Какой-то текст бла бла"
+                    android:id="@+id/textView4"
+                    android:layout_gravity="center" />
+
+
+            </FrameLayout>
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:src="@drawable/wallp"
+                android:cropToPadding="false" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Program name"
+                    android:id="@+id/program_title"
+                    android:textSize="22dp" />
+
+                <include
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/program_parts_view"
+                    android:layout_gravity="center|left"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="6dp" />
+
+                <include
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/producer_view"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Тренироваться"
+                    android:id="@+id/gotrain_button"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:textColor="#0093cc"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </android.support.v7.widget.CardView>
 </LinearLayout>

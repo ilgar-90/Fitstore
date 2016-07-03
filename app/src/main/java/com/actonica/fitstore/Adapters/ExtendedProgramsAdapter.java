@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.actonica.fitstore.Activities.ProducerActivity;
 import com.actonica.fitstore.Activities.ProgramActivity;
-import com.actonica.fitstore.Helpers.ImgUrlResolver;
+import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 import com.bumptech.glide.Glide;
@@ -55,14 +55,14 @@ public class ExtendedProgramsAdapter extends RecyclerView.Adapter<ExtendedProgra
         holder.part_number.setText(program.getPartNo().toString());
         holder.parts_total.setText(program.getPartsTotal().toString());
         Glide.with(mContext)
-                .load(ImgUrlResolver.getProgramAvatar(program.getCover()))
+                .load(UrlResolver.getProgramAvatar(program.getCover()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.program_avatar);
 
         if (showProducer) {
             holder.prod_nick.setText(program.getProducer().getNickname());
             Glide.with(mContext)
-                    .load(ImgUrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
+                    .load(UrlResolver.getProducerAvatar(program.getProducer().getAvatar()))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holder.prod_avatar);
         }
