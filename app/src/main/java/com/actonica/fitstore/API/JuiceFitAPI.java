@@ -22,8 +22,14 @@ public interface JuiceFitAPI {
     Call<GetCategoriesResponse> getCategories(@Query("token") String token);
 
     @GET("/programs/{program_id}/related")
-    Call<GetRelatedProgramsResponse> getRelatedPrograms(@Path("program_id") String program_id, @Query("token") String token);
+    Call<GetProgramsResponse> getRelatedPrograms(@Path("program_id") String program_id, @Query("token") String token);
 
     @GET("/producers/{producer_id}/programs")
     Call<GetProducerProgramsResponse> getProducerPrograms(@Path("producer_id") String producer_id, @Query("token") String token);
+
+    @GET("/users/programs")
+    Call<GetProgramsResponse> getUserPrograms(@Query("token") String token);
+
+    @GET("/programs/{program_id}")
+    Call<GetFullProgramResponse> getFullProgram(@Path("program_id") int program_id, @Query("token") String token);
 }

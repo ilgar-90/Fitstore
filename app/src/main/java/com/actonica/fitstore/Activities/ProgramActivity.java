@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.Adapters.ProgramsAdapter;
-import com.actonica.fitstore.ApiResponsesGson.GetRelatedProgramsResponse;
+import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
 import com.actonica.fitstore.Downloader.Downloader;
 import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Program;
@@ -110,11 +110,11 @@ public class ProgramActivity extends AppCompatActivity {
         });
 
 
-        JuiceFitAPIHandler.getRelatedPrograms(program.getId().toString(), this, new Callback<GetRelatedProgramsResponse>() {
+        JuiceFitAPIHandler.getRelatedPrograms(program.getId().toString(), this, new Callback<GetProgramsResponse>() {
             @Override
-            public void onResponse(Call<GetRelatedProgramsResponse> call, Response<GetRelatedProgramsResponse> response) {
+            public void onResponse(Call<GetProgramsResponse> call, Response<GetProgramsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Program> related = response.body().related_programs;
+                    List<Program> related = response.body().programs;
                     if  (related.size() > 0) {
                         ProgramsAdapter itemListDataAdapter = new ProgramsAdapter(ProgramActivity.this, related);
                         related_rv.setHasFixedSize(true);
@@ -126,7 +126,7 @@ public class ProgramActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetRelatedProgramsResponse> call, Throwable t) {
+            public void onFailure(Call<GetProgramsResponse> call, Throwable t) {
                 Toast.makeText(ProgramActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

@@ -3,8 +3,9 @@ package com.actonica.fitstore.API;
 import android.content.Context;
 
 import com.actonica.fitstore.ApiResponsesGson.GetCategoriesResponse;
+import com.actonica.fitstore.ApiResponsesGson.GetFullProgramResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProducerProgramsResponse;
-import com.actonica.fitstore.ApiResponsesGson.GetRelatedProgramsResponse;
+import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
 import com.actonica.fitstore.Helpers.SharedPrefsHelper;
@@ -76,7 +77,7 @@ public class JuiceFitAPIHandler {
         call.enqueue(callback);
     }
 
-    public static void getRelatedPrograms(String program_id, Context context, Callback<GetRelatedProgramsResponse> callback) {
+    public static void getRelatedPrograms(String program_id, Context context, Callback<GetProgramsResponse> callback) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -87,7 +88,7 @@ public class JuiceFitAPIHandler {
 
         // prepare call in Retrofit 2.0
         JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
-        Call<GetRelatedProgramsResponse> call = juiceFitAPI.getRelatedPrograms(program_id, getToken(context));
+        Call<GetProgramsResponse> call = juiceFitAPI.getRelatedPrograms(program_id, getToken(context));
         //asynchronous call
         call.enqueue(callback);
     }
@@ -104,6 +105,38 @@ public class JuiceFitAPIHandler {
         // prepare call in Retrofit 2.0
         JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
         Call<GetProducerProgramsResponse> call = juiceFitAPI.getProducerPrograms(producer_id, getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void getUserPrograms(Context context, Callback<GetProgramsResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<GetProgramsResponse> call = juiceFitAPI.getUserPrograms(getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void getFullProgram(int program_id, Context context, Callback<GetFullProgramResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<GetFullProgramResponse> call = juiceFitAPI.getFullProgram(program_id, getToken(context));
         //asynchronous call
         call.enqueue(callback);
     }

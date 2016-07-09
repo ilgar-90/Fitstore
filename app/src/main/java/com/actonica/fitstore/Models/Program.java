@@ -4,13 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class Program implements Serializable {
 
-    @SerializedName("id")
+public class Program extends RealmObject implements Serializable {
+    @SerializedName(value="id", alternate={"program_id"})
     @Expose
     private Integer id;
     @SerializedName("part_no")
@@ -52,9 +57,24 @@ public class Program implements Serializable {
     @SerializedName("plan")
     @Expose
     private String plan;
+    @SerializedName("category")
+    @Expose
+    private Category category;
     @SerializedName("producer")
     @Expose
     private Producer producer;
+    @SerializedName("trainings")
+    @Expose
+    private RealmList<Training> trainings = new RealmList<Training>();
+    @SerializedName("exercises")
+    @Expose
+    private RealmList<Exercise> exercises = new RealmList<Exercise>();
+    @SerializedName("next_training_id")
+    @Expose
+    private Integer next_training_id;
+
+    private boolean used;
+    private String lastUsedAt;
 
     /**
      *
@@ -311,6 +331,24 @@ public class Program implements Serializable {
     /**
      *
      * @return
+     * The category
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     *
+     * @param category
+     * The category
+     */
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
+     *
+     * @return
      * The producer
      */
     public Producer getProducer() {
@@ -324,6 +362,67 @@ public class Program implements Serializable {
      */
     public void setProducer(Producer producer) {
         this.producer = producer;
+    }
+
+    /**
+     *
+     * @return
+     * The trainings
+     */
+    public RealmList<Training> getTrainings() {
+        return trainings;
+    }
+
+    /**
+     *
+     * @param trainings
+     * The trainings
+     */
+    public void setTrainings(RealmList<Training> trainings) {
+        this.trainings = trainings;
+    }
+
+    /**
+     *
+     * @return
+     * The exercises
+     */
+    public RealmList<Exercise> getExercises() {
+        return exercises;
+    }
+
+    /**
+     *
+     * @param exercises
+     * The exercises
+     */
+    public void setExercises(RealmList<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+
+    public Integer getNext_training_id() {
+        return next_training_id;
+    }
+
+    public void setNext_training_id(Integer next_training_id) {
+        this.next_training_id = next_training_id;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public String getLastUsedAt() {
+        return lastUsedAt;
+    }
+
+    public void setLastUsedAt(String lastUsedAt) {
+        this.lastUsedAt = lastUsedAt;
     }
 }
 

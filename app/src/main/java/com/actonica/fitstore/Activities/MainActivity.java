@@ -1,5 +1,6 @@
 package com.actonica.fitstore.Activities;
 
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import com.actonica.fitstore.Fragments.ActiveFragment;
 import com.actonica.fitstore.Fragments.FitStoreFragment;
 import com.actonica.fitstore.Fragments.SettingsFragment;
+import com.actonica.fitstore.Helpers.UserInfoSyncer;
 import com.actonica.fitstore.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarFragment;
@@ -21,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        if(intent.hasExtra("loadPrograms"))
+            UserInfoSyncer.fillActivePrograms(MainActivity.this);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noTabletGoodness();

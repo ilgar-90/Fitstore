@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
+import com.actonica.fitstore.Helpers.UserInfoSyncer;
 import com.actonica.fitstore.R;
 import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 
@@ -96,6 +97,7 @@ public class SigninActivity extends AppCompatActivity {
                                 Toast.makeText(SigninActivity.this, "Saved token: "+token, Toast.LENGTH_LONG).show();
 
                                 Intent i = new Intent(getBaseContext(), MainActivity.class);
+                                i.putExtra("loadPrograms", true);
                                 startActivity(i);
                                 finish();
 

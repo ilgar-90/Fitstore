@@ -7,10 +7,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class Producer implements Serializable {
+public class Producer extends RealmObject implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -32,7 +35,7 @@ public class Producer implements Serializable {
     private String avatar;
     @SerializedName("programs")
     @Expose
-    private List<Program> programs = new ArrayList<Program>();
+    private RealmList<Program> programs = new RealmList<Program>();
 
     /**
      *
@@ -147,7 +150,7 @@ public class Producer implements Serializable {
      * @return
      * The programs
      */
-    public List<Program> getPrograms() {
+    public RealmList<Program> getPrograms() {
         return programs;
     }
 
@@ -156,7 +159,7 @@ public class Producer implements Serializable {
      * @param programs
      * The programs
      */
-    public void setPrograms(List<Program> programs) {
+    public void setPrograms(RealmList<Program> programs) {
         this.programs = programs;
     }
 
