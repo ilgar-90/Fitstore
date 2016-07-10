@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActiveFragment extends Fragment {
-    public CarouselPagerAdapter adapter;
-    public ViewPager pager;
+    private CarouselPagerAdapter adapter;
+    private ViewPager pager;
+    private Toolbar toolbar;
 
     public static ActiveFragment newInstance() {
         ActiveFragment fragment = new ActiveFragment();
@@ -37,6 +40,10 @@ public class ActiveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_active, container, false);
+
+        toolbar = (Toolbar)v.findViewById(R.id.toolbar);
+        toolbar.setTitle("Active");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         pager = (ViewPager) v.findViewById(R.id.myviewpager);
         DisplayMetrics metrics = new DisplayMetrics();

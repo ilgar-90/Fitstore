@@ -3,16 +3,14 @@ package com.actonica.fitstore.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
 
 /**
  * Created by ilgar on 09.07.2016.
  */
-public class Bit extends RealmObject {
+public class Bit implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -31,7 +29,7 @@ public class Bit extends RealmObject {
     private Integer orderNo;
     @SerializedName("bit_exercises")
     @Expose
-    private RealmList<BitExercise> bitExercises = new RealmList<BitExercise>();
+    private List<BitExercise> bitExercises = new ArrayList<BitExercise>();
 
     private boolean finished;
 
@@ -130,7 +128,7 @@ public class Bit extends RealmObject {
      * @return
      * The bitExercises
      */
-    public RealmList<BitExercise> getBitExercises() {
+    public List<BitExercise> getBitExercises() {
         return bitExercises;
     }
 
@@ -139,7 +137,7 @@ public class Bit extends RealmObject {
      * @param bitExercises
      * The bit_exercises
      */
-    public void setBitExercises(RealmList<BitExercise> bitExercises) {
+    public void setBitExercises(List<BitExercise> bitExercises) {
         this.bitExercises = bitExercises;
     }
 

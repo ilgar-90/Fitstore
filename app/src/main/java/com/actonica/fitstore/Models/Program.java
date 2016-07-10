@@ -7,14 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
-
 /**
  * Created by ilgar on 27.06.2016.
  */
 
-public class Program extends RealmObject implements Serializable {
+public class Program implements Serializable {
     @SerializedName(value="id", alternate={"program_id"})
     @Expose
     private Integer id;
@@ -65,10 +62,10 @@ public class Program extends RealmObject implements Serializable {
     private Producer producer;
     @SerializedName("trainings")
     @Expose
-    private RealmList<Training> trainings = new RealmList<Training>();
+    private List<Training> trainings = new ArrayList<Training>();
     @SerializedName("exercises")
     @Expose
-    private RealmList<Exercise> exercises = new RealmList<Exercise>();
+    private List<Exercise> exercises = new ArrayList<Exercise>();
     @SerializedName("next_training_id")
     @Expose
     private Integer next_training_id;
@@ -369,7 +366,7 @@ public class Program extends RealmObject implements Serializable {
      * @return
      * The trainings
      */
-    public RealmList<Training> getTrainings() {
+    public List<Training> getTrainings() {
         return trainings;
     }
 
@@ -378,7 +375,7 @@ public class Program extends RealmObject implements Serializable {
      * @param trainings
      * The trainings
      */
-    public void setTrainings(RealmList<Training> trainings) {
+    public void setTrainings(List<Training> trainings) {
         this.trainings = trainings;
     }
 
@@ -387,7 +384,7 @@ public class Program extends RealmObject implements Serializable {
      * @return
      * The exercises
      */
-    public RealmList<Exercise> getExercises() {
+    public List<Exercise> getExercises() {
         return exercises;
     }
 
@@ -396,7 +393,7 @@ public class Program extends RealmObject implements Serializable {
      * @param exercises
      * The exercises
      */
-    public void setExercises(RealmList<Exercise> exercises) {
+    public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
     }
 

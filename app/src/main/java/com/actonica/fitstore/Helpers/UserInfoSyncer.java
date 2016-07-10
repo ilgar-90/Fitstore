@@ -18,9 +18,6 @@ import com.actonica.fitstore.R;
 
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,8 +28,6 @@ import retrofit2.Response;
 public class UserInfoSyncer {
 
     public static void fillActivePrograms(final Context ctx){
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder(ctx).build();
-        Realm.setDefaultConfiguration(realmConfig);
         JuiceFitAPIHandler.getUserPrograms(ctx, new Callback<GetProgramsResponse>() {
             @Override
             public void onResponse(Call<GetProgramsResponse> call, Response<GetProgramsResponse> response) {
@@ -65,10 +60,7 @@ public class UserInfoSyncer {
                                             i++;
                                         }
 
-                                        Realm realm = Realm.getDefaultInstance();
-                                        realm.beginTransaction();
-                                        realm.copyToRealm(fullProgram);
-                                        realm.commitTransaction();
+                                        //TODO SAVE program to DB
 
                                         Downloader.getInstance(ctx).startDownload(fullProgram);
                                     }

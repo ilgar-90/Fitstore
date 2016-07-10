@@ -6,14 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class Producer extends RealmObject implements Serializable {
+public class Producer implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -35,7 +31,7 @@ public class Producer extends RealmObject implements Serializable {
     private String avatar;
     @SerializedName("programs")
     @Expose
-    private RealmList<Program> programs = new RealmList<Program>();
+    private List<Program> programs = new ArrayList<Program>();
 
     /**
      *
@@ -150,7 +146,7 @@ public class Producer extends RealmObject implements Serializable {
      * @return
      * The programs
      */
-    public RealmList<Program> getPrograms() {
+    public List<Program> getPrograms() {
         return programs;
     }
 
@@ -159,7 +155,7 @@ public class Producer extends RealmObject implements Serializable {
      * @param programs
      * The programs
      */
-    public void setPrograms(RealmList<Program> programs) {
+    public void setPrograms(List<Program> programs) {
         this.programs = programs;
     }
 

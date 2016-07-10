@@ -3,16 +3,14 @@ package com.actonica.fitstore.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
 
 /**
  * Created by ilgar on 09.07.2016.
  */
-public class Training extends RealmObject {
+public class Training implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -28,7 +26,7 @@ public class Training extends RealmObject {
     private String description;
     @SerializedName("bits")
     @Expose
-    private RealmList<Bit> bits = new RealmList<Bit>();
+    private List<Bit> bits = new ArrayList<Bit>();
 
     /**
      *
@@ -107,7 +105,7 @@ public class Training extends RealmObject {
      * @return
      * The bits
      */
-    public RealmList<Bit> getBits() {
+    public List<Bit> getBits() {
         return bits;
     }
 
@@ -116,7 +114,7 @@ public class Training extends RealmObject {
      * @param bits
      * The bits
      */
-    public void setBits(RealmList<Bit> bits) {
+    public void setBits(List<Bit> bits) {
         this.bits = bits;
     }
 

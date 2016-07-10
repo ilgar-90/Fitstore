@@ -101,6 +101,8 @@
                     app:contentPadding="10dp">
 
                     <TextView
+                        android:textColorLink="#2290ff"
+                        android:autoLink="web"
                         android:id="@+id/prod_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

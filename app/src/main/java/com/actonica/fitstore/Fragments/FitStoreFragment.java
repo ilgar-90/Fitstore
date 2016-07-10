@@ -5,8 +5,10 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class FitStoreFragment extends Fragment {
 
     private ProgressDialog progress;
     private RecyclerView categories_rv;
+    private Toolbar toolbar;
 
     public static FitStoreFragment newInstance() {
         FitStoreFragment fragment = new FitStoreFragment();
@@ -53,6 +56,9 @@ public class FitStoreFragment extends Fragment {
 
         categories_rv = (RecyclerView) v.findViewById(R.id.categories);
         categories_rv.setHasFixedSize(true);
+        toolbar = (Toolbar)v.findViewById(R.id.toolbar);
+        toolbar.setTitle("Fit Store");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 
         JuiceFitAPIHandler.getCategories(getActivity(), new Callback<GetCategoriesResponse>() {

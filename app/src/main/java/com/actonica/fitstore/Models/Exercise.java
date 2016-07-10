@@ -3,16 +3,14 @@ package com.actonica.fitstore.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
 
 /**
  * Created by ilgar on 09.07.2016.
  */
-public class Exercise extends RealmObject {
+public class Exercise  implements Serializable {
 
     @SerializedName("id")
     @Expose
