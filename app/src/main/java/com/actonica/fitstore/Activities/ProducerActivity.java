@@ -1,21 +1,18 @@
 package com.actonica.fitstore.Activities;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.method.LinkMovementMethod;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,24 +33,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProducerActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class ProducerActivity extends AppCompatActivity {
 
     RecyclerView programs_rv;
 
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
-    private static final int ALPHA_ANIMATIONS_DURATION              = 200;
-
-    private boolean mIsTheTitleVisible          = false;
-    private boolean mIsTheTitleContainerVisible = true;
-
     private AppBarLayout appbar;
-    private CollapsingToolbarLayout collapsing;
-    private ImageView coverImage;
-    private FrameLayout framelayoutTitle;
-    private LinearLayout linearlayoutTitle;
     private Toolbar toolbar;
-    private TextView textviewTitle;
     private ImageView prod_avatar;
     private TextView prod_name;
     private TextView prod_nick;
@@ -63,13 +48,7 @@ public class ProducerActivity extends AppCompatActivity implements AppBarLayout.
 
     private void findViews() {
         appbar = (AppBarLayout)findViewById( R.id.appbar );
-        collapsing = (CollapsingToolbarLayout)findViewById( R.id.collapsing );
-        coverImage = (ImageView)findViewById( R.id.imageview_placeholder );
-        framelayoutTitle = (FrameLayout)findViewById( R.id.framelayout_title );
-        linearlayoutTitle = (LinearLayout)findViewById( R.id.linearlayout_title );
         toolbar = (Toolbar)findViewById( R.id.toolbar );
-        textviewTitle = (TextView)findViewById( R.id.title );
-
         prod_avatar = (ImageView)findViewById( R.id.prod_avatar );
         prod_name = (TextView)findViewById( R.id.prod_name );
         prod_nick = (TextView)findViewById( R.id.prod_nick );
@@ -87,19 +66,27 @@ public class ProducerActivity extends AppCompatActivity implements AppBarLayout.
         final Producer producer = (Producer) i.getSerializableExtra("producer");
 
         findViews();
-        toolbar.setTitle("");
-        appbar.addOnOffsetChangedListener(this);
+        toolbar.setTitle(producer.getName());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        startAlphaAnimation(textviewTitle, 0, View.INVISIBLE);
 
-        textviewTitle.setText(producer.getName());
         prod_name.setText(producer.getName());
         prod_nick.setText(producer.getNickname());
         if(producer.getDescription() != null && !producer.getDescription().isEmpty()) {
             prod_about.setText(producer.getDescription());
             prod_about_card.setVisibility(View.VISIBLE);
         }
+
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int calculatedSize = (int) Math.round(size.x / 3.3);
+        prod_avatar.getLayoutParams().height = calculatedSize;
+        prod_avatar.getLayoutParams().width = calculatedSize;
+
+
         Glide.with(this)
                 .load(UrlResolver.getProducerAvatar(producer.getAvatar()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -132,57 +119,12 @@ public class ProducerActivity extends AppCompatActivity implements AppBarLayout.
         });
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float percentage = (float) Math.abs(offset) / (float) maxScroll;
 
-        handleAlphaOnTitle(percentage);
-        handleToolbarTitleVisibility(percentage);
-    }
 
-    private void handleToolbarTitleVisibility(float percentage) {
-        if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
 
-            if(!mIsTheTitleVisible) {
-                startAlphaAnimation(textviewTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleVisible = true;
-            }
 
-        } else {
 
-            if (mIsTheTitleVisible) {
-                startAlphaAnimation(textviewTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleVisible = false;
-            }
-        }
-    }
 
-    private void handleAlphaOnTitle(float percentage) {
-        if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if(mIsTheTitleContainerVisible) {
-                startAlphaAnimation(linearlayoutTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleContainerVisible = false;
-            }
-
-        } else {
-
-            if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(linearlayoutTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleContainerVisible = true;
-            }
-        }
-    }
-
-    public static void startAlphaAnimation (View v, long duration, int visibility) {
-        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
-                ? new AlphaAnimation(0f, 1f)
-                : new AlphaAnimation(1f, 0f);
-
-        alphaAnimation.setDuration(duration);
-        alphaAnimation.setFillAfter(true);
-        v.startAnimation(alphaAnimation);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

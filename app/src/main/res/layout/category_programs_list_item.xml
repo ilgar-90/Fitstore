@@ -64,7 +64,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             android:id="@+id/prog_description"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:textSize="12dp" />
 
         <LinearLayout
             android:orientation="horizontal"

@@ -11,6 +11,8 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         android:id="@+id/category_programs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
