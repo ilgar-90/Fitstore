@@ -37,23 +37,19 @@ public class ProducerActivity extends AppCompatActivity {
 
     RecyclerView programs_rv;
 
-    private AppBarLayout appbar;
     private Toolbar toolbar;
     private ImageView prod_avatar;
     private TextView prod_name;
     private TextView prod_nick;
     private TextView prod_about;
-    private CardView prod_about_card;
 
 
     private void findViews() {
-        appbar = (AppBarLayout)findViewById( R.id.appbar );
         toolbar = (Toolbar)findViewById( R.id.toolbar );
         prod_avatar = (ImageView)findViewById( R.id.prod_avatar );
         prod_name = (TextView)findViewById( R.id.prod_name );
         prod_nick = (TextView)findViewById( R.id.prod_nick );
         prod_about = (TextView)findViewById( R.id.prod_about );
-        prod_about_card = (CardView)findViewById(R.id.prod_about_card);
     }
 
     @Override
@@ -74,7 +70,6 @@ public class ProducerActivity extends AppCompatActivity {
         prod_nick.setText(producer.getNickname());
         if(producer.getDescription() != null && !producer.getDescription().isEmpty()) {
             prod_about.setText(producer.getDescription());
-            prod_about_card.setVisibility(View.VISIBLE);
         }
 
 
@@ -82,7 +77,7 @@ public class ProducerActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        int calculatedSize = (int) Math.round(size.x / 3.3);
+        int calculatedSize = (int) Math.round(size.x / 3);
         prod_avatar.getLayoutParams().height = calculatedSize;
         prod_avatar.getLayoutParams().width = calculatedSize;
 
