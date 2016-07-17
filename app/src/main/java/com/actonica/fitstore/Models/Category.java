@@ -7,13 +7,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 
 /**
  * Created by ilgar on 27.06.2016.
  */
-public class Category implements Serializable {
+public class Category extends RealmObject implements Serializable {
 
-
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -22,7 +26,7 @@ public class Category implements Serializable {
     private String title;
     @SerializedName("programs")
     @Expose
-    private List<Program> programs = new ArrayList<>();
+    private RealmList<Program> programs = new RealmList<>();
 
     /**
      *
@@ -65,7 +69,7 @@ public class Category implements Serializable {
      * @return
      * The programs
      */
-    public List<Program> getPrograms() {
+    public RealmList<Program> getPrograms() {
         return programs;
     }
 
@@ -74,7 +78,7 @@ public class Category implements Serializable {
      * @param programs
      * The programs
      */
-    public void setPrograms(List<Program> programs) {
+    public void setPrograms(RealmList<Program> programs) {
         this.programs = programs;
     }
 

@@ -68,7 +68,7 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if(s.length() != 10)
+                if(s.length() != 11)
                     request_code.setEnabled(false);
                 else
                     request_code.setEnabled(true);

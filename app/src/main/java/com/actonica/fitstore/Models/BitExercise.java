@@ -5,11 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by ilgar on 09.07.2016.
  */
-public class BitExercise implements Serializable {
+public class BitExercise extends RealmObject implements Serializable {
 
+    @PrimaryKey
     @SerializedName("exercise_id")
     @Expose
     private Integer exerciseId;

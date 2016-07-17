@@ -7,11 +7,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by ilgar on 27.06.2016.
  */
 
-public class Program implements Serializable {
+public class Program extends RealmObject implements Serializable {
+    @PrimaryKey
     @SerializedName(value="id", alternate={"program_id"})
     @Expose
     private Integer id;
@@ -62,10 +67,10 @@ public class Program implements Serializable {
     private Producer producer;
     @SerializedName("trainings")
     @Expose
-    private List<Training> trainings = new ArrayList<Training>();
+    private RealmList<Training> trainings = new RealmList<>();
     @SerializedName("exercises")
     @Expose
-    private List<Exercise> exercises = new ArrayList<Exercise>();
+    private RealmList<Exercise> exercises = new RealmList<>();
     @SerializedName("next_training_id")
     @Expose
     private Integer next_training_id;
@@ -366,7 +371,7 @@ public class Program implements Serializable {
      * @return
      * The trainings
      */
-    public List<Training> getTrainings() {
+    public RealmList<Training> getTrainings() {
         return trainings;
     }
 
@@ -375,7 +380,7 @@ public class Program implements Serializable {
      * @param trainings
      * The trainings
      */
-    public void setTrainings(List<Training> trainings) {
+    public void setTrainings(RealmList<Training> trainings) {
         this.trainings = trainings;
     }
 
@@ -384,7 +389,7 @@ public class Program implements Serializable {
      * @return
      * The exercises
      */
-    public List<Exercise> getExercises() {
+    public RealmList<Exercise> getExercises() {
         return exercises;
     }
 
@@ -393,7 +398,7 @@ public class Program implements Serializable {
      * @param exercises
      * The exercises
      */
-    public void setExercises(List<Exercise> exercises) {
+    public void setExercises(RealmList<Exercise> exercises) {
         this.exercises = exercises;
     }
 
