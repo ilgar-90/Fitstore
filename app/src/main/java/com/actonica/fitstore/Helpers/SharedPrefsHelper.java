@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -59,5 +60,24 @@ public class SharedPrefsHelper {
         Gson gson = new Gson();
         Type listOfTestObject = new TypeToken<List<Program>>(){}.getType();
         return gson.fromJson(savedProgramsStr, listOfTestObject);
+    }
+
+    public static void removeSavedProgram(int programId, Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedProgramsStr = sharedPref.getString(PREF_SAVED_PROGRAMS, null);
+        Gson gson = new Gson();
+        Type listOfTestObject = new TypeToken<List<Program>>(){}.getType();
+        List<Program> savedPrograms = gson.fromJson(savedProgramsStr, listOfTestObject);
+        for (Iterator<Program> iter = savedPrograms.listIterator(); iter.hasNext(); ) {
+            Program prog = iter.next();
+            if (prog.getId() == programId) {
+                iter.remove();
+            }
+        }
+
+        String resultToSave = gson.toJson(savedPrograms, listOfTestObject);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(PREF_SAVED_PROGRAMS, resultToSave);
+        editor.commit();
     }
 }

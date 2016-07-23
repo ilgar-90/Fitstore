@@ -7,6 +7,7 @@ import com.actonica.fitstore.ApiResponsesGson.GetFullProgramResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProducerProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
+import com.actonica.fitstore.ApiResponsesGson.ProgramInteractionResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
 import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 import com.google.gson.Gson;
@@ -137,6 +138,38 @@ public class JuiceFitAPIHandler {
         // prepare call in Retrofit 2.0
         JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
         Call<GetFullProgramResponse> call = juiceFitAPI.getFullProgram(program_id, getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void removeProgram(int program_id, Context context, Callback<ProgramInteractionResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<ProgramInteractionResponse> call = juiceFitAPI.removeProgram(program_id, getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void startProgram(int program_id, Context context, Callback<ProgramInteractionResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<ProgramInteractionResponse> call = juiceFitAPI.startProgram(program_id, getToken(context));
         //asynchronous call
         call.enqueue(callback);
     }

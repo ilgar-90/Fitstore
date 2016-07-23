@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
 import com.actonica.fitstore.Activities.MainActivity;
 import com.actonica.fitstore.Fragments.ActiveFragment;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         fragment.setArguments(args);
         return fragment;
     }
+    
 
     @Override
     public int getCount() {

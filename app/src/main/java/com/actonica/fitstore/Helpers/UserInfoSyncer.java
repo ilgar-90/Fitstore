@@ -72,7 +72,7 @@ public class UserInfoSyncer {
 
                                         //TODO SAVE program to DB
 
-                                        //Downloader.getInstance(ctx).startDownload(fullProgram);
+                                        Downloader.getInstance(ctx).startDownload(fullProgram);
                                     }
                                 }
 
@@ -96,5 +96,9 @@ public class UserInfoSyncer {
                 Toast.makeText(ctx, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static void removeProgram(Context context){
+
     }
 }

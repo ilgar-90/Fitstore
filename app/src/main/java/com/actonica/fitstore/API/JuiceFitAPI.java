@@ -32,4 +32,10 @@ public interface JuiceFitAPI {
 
     @GET("/programs/{program_id}")
     Call<GetFullProgramResponse> getFullProgram(@Path("program_id") int program_id, @Query("token") String token);
+
+    @POST("/users/programs/{program_id}/delete")
+    Call<ProgramInteractionResponse> removeProgram(@Path("program_id") int program_id, @Query("token") String token);
+
+    @POST("/users/programs/{program_id}/start")
+    Call<ProgramInteractionResponse> startProgram(@Path("program_id") int program_id, @Query("token") String token);
 }

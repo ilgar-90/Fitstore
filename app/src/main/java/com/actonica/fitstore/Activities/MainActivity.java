@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.actonica.fitstore.Fragments.ActiveFragment;
 import com.actonica.fitstore.Fragments.FitStoreFragment;
@@ -22,6 +23,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private BottomBar mBottomBar;
+    private FitStoreFragment fitStoreFragment;
+    private ActiveFragment activeFragment;
+    private SettingsFragment settingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         mBottomBar.noTabletGoodness();
 
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragments_container,
-                new BottomBarFragment(FitStoreFragment.newInstance(), R.drawable.ic_fitstore, "FitStore"),
-                new BottomBarFragment(ActiveFragment.newInstance(), R.drawable.ic_active, "Active"),
-                new BottomBarFragment(SettingsFragment.newInstance(), R.drawable.ic_settings, "Settings")
+                new BottomBarFragment(fitStoreFragment = FitStoreFragment.newInstance(), R.drawable.ic_fitstore, "FitStore"),
+                new BottomBarFragment(activeFragment = ActiveFragment.newInstance(), R.drawable.ic_active, "Active"),
+                new BottomBarFragment(settingsFragment = SettingsFragment.newInstance(), R.drawable.ic_settings, "Settings")
         );
 
 
@@ -58,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        mBottomBar.setActiveTabColor("#009688");
+        mBottomBar.setActiveTabColor("#3BB9FF");
         mBottomBar.selectTabAtPosition(1, false);
+    }
+
+    public void removeProgram(int programId){
+        activeFragment.removeProgram(programId);
     }
 }

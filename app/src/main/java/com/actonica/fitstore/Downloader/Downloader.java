@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Environment;
 import android.support.v4.os.AsyncTaskCompat;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.actonica.fitstore.API.JuiceFitAPIHandler;
+import com.actonica.fitstore.ApiResponsesGson.ProgramInteractionResponse;
 import com.actonica.fitstore.Helpers.FilesPathResolver;
 import com.actonica.fitstore.Models.Program;
 
@@ -17,6 +20,10 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by ilgar on 03.07.2016.
@@ -43,11 +50,26 @@ public class Downloader implements IDownloader{
 
     private HashMap<Integer, DownloadTaskInfo> downloads = new HashMap<>();
 
-    public void startDownload(Program program){
-        final DownloadTask downloadTask = new DownloadTask(program.getId(), program.getZipFile(), context, this);
-        AsyncTaskCompat.executeParallel(downloadTask, null);
-        DownloadTaskInfo dti = new DownloadTaskInfo(downloadTask, program);
-        downloads.put(program.getId(), dti);
+    public void startDownload(final Program program){
+        JuiceFitAPIHandler.startProgram(program.getId(), context, new Callback<ProgramInteractionResponse>() {
+            @Override
+            public void onResponse(Call<ProgramInteractionResponse> call, Response<ProgramInteractionResponse> response) {
+                if (response.body() != null && response.isSuccessful()) {
+                    /*final DownloadTask downloadTask = new DownloadTask(program.getId(), program.getZipFile(), context, Downloader.this);
+                    AsyncTaskCompat.executeParallel(downloadTask, null);
+                    DownloadTaskInfo dti = new DownloadTaskInfo(downloadTask, program);
+                    downloads.put(program.getId(), dti);*/
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProgramInteractionResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
 
