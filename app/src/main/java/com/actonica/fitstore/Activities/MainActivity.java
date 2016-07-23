@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.actonica.fitstore.Fragments.ActiveFragment;
 import com.actonica.fitstore.Fragments.FitStoreFragment;
 import com.actonica.fitstore.Fragments.SettingsFragment;
+import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 import com.actonica.fitstore.Helpers.UserInfoSyncer;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
@@ -15,10 +16,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarFragment;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmList;
-import io.realm.RealmResults;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,12 +31,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.hasExtra("loadPrograms"))
             UserInfoSyncer.fillActivePrograms(MainActivity.this);
-
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder(MainActivity.this).build();
-        Realm.setDefaultConfiguration(realmConfig);
-
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Program> progs = realm.where(Program.class).findAll();
 
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);

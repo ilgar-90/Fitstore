@@ -29,6 +29,9 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new ItemFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("program", this.data.get(i));
+        fragment.setArguments(args);
         return fragment;
     }
 

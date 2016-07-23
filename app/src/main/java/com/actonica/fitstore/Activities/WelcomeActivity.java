@@ -15,8 +15,8 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        SharedPrefsHelper sphelper = new SharedPrefsHelper(WelcomeActivity.this);
-        String saved_token = sphelper.getSavedToken();
+
+        String saved_token = SharedPrefsHelper.getSavedToken(getApplicationContext());
         if (!saved_token.equals("")){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

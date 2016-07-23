@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.actonica.fitstore.CustomViews.CarouselPagerAdapter;
 import com.actonica.fitstore.Downloader.Downloader;
+import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -26,6 +27,7 @@ public class ActiveFragment extends Fragment {
     private CarouselPagerAdapter adapter;
     private ViewPager pager;
     private Toolbar toolbar;
+    private List<Program> savedPrograms;
 
     public static ActiveFragment newInstance() {
         ActiveFragment fragment = new ActiveFragment();
@@ -41,6 +43,8 @@ public class ActiveFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_active, container, false);
 
+        savedPrograms = SharedPrefsHelper.getSavedPrograms(getActivity().getApplicationContext());
+
         toolbar = (Toolbar)v.findViewById(R.id.toolbar);
         toolbar.setTitle("Active");
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -51,27 +55,20 @@ public class ActiveFragment extends Fragment {
         int pageMargin = ((metrics.widthPixels / 12) * 2);
         pager.setPageMargin(-pageMargin);
 
-        adapter = new CarouselPagerAdapter(getChildFragmentManager(), getData());
-        pager.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        pager.addOnPageChangeListener(adapter);
-
-        CirclePageIndicator indicator = (CirclePageIndicator)v.findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
-        indicator.setSnap(true);
-        indicator.setFillColor(Color.GRAY);
-        indicator.setStrokeColor(Color.GRAY);
-
-        pager.setOffscreenPageLimit(3);
-
+        if (savedPrograms != null) {
+            adapter = new CarouselPagerAdapter(getChildFragmentManager(), savedPrograms);
+            pager.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            pager.addOnPageChangeListener(adapter);
+            CirclePageIndicator indicator = (CirclePageIndicator) v.findViewById(R.id.indicator);
+            indicator.setViewPager(pager);
+            indicator.setSnap(true);
+            indicator.setFillColor(Color.GRAY);
+            indicator.setStrokeColor(Color.GRAY);
+            pager.setOffscreenPageLimit(3);
+        }
 
 
         return v;
-    }
-
-    private List<Program> getData() {
-        List<Program> data = new ArrayList<>();
-        return data;
     }
 }

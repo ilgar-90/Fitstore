@@ -92,8 +92,7 @@ public class SigninActivity extends AppCompatActivity {
                             if (response.body() != null && response.isSuccessful()) {
                                 String token = response.body().token;
                                 boolean is_new = response.body().is_new;
-                                SharedPrefsHelper sphelper = new SharedPrefsHelper(SigninActivity.this);
-                                sphelper.saveToken(token);
+                                SharedPrefsHelper.saveToken(token, getApplicationContext());
                                 Toast.makeText(SigninActivity.this, "Saved token: "+token, Toast.LENGTH_LONG).show();
 
                                 Intent i = new Intent(getBaseContext(), MainActivity.class);

@@ -142,8 +142,7 @@ public class JuiceFitAPIHandler {
     }
 
     private static String getToken(Context context){
-        SharedPrefsHelper sphelper = new SharedPrefsHelper(context);
-        String saved_token = sphelper.getSavedToken();
+        String saved_token = SharedPrefsHelper.getSavedToken(context);
         return saved_token;
     }
 

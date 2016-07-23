@@ -15,11 +15,12 @@ import com.actonica.fitstore.Models.Bit;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.Models.Training;
 import com.actonica.fitstore.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,9 +31,6 @@ import retrofit2.Response;
 public class UserInfoSyncer {
 
     public static void fillActivePrograms(final Context ctx){
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder(ctx).build();
-        Realm.setDefaultConfiguration(realmConfig);
-
         JuiceFitAPIHandler.getUserPrograms(ctx, new Callback<GetProgramsResponse>() {
             @Override
             public void onResponse(Call<GetProgramsResponse> call, Response<GetProgramsResponse> response) {
@@ -40,8 +38,6 @@ public class UserInfoSyncer {
                     List<Program> programs = response.body().programs;
                     if (programs.size() > 0) {
                         for (final Program prog : programs) {
-
-
                             JuiceFitAPIHandler.getFullProgram(prog.getId(), ctx, new Callback<GetFullProgramResponse>() {
                                 @Override
                                 public void onResponse(Call<GetFullProgramResponse> call, Response<GetFullProgramResponse> response) {
@@ -65,14 +61,18 @@ public class UserInfoSyncer {
                                             i++;
                                         }
 
-                                        Realm realm = Realm.getDefaultInstance();
+                                        /*Realm realm = Realm.getDefaultInstance();
                                         realm.beginTransaction();
                                         realm.copyToRealm(fullProgram);
-                                        realm.commitTransaction();
+                                        realm.commitTransaction();*/
+
+
+                                        SharedPrefsHelper.saveProgram(fullProgram, ctx);
+
 
                                         //TODO SAVE program to DB
 
-                                        Downloader.getInstance(ctx).startDownload(fullProgram);
+                                        //Downloader.getInstance(ctx).startDownload(fullProgram);
                                     }
                                 }
 
@@ -97,5 +97,4 @@ public class UserInfoSyncer {
             }
         });
     }
-
 }

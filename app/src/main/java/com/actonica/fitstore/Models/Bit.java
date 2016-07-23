@@ -7,16 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by ilgar on 09.07.2016.
  */
-public class Bit extends RealmObject implements Serializable {
-
-    @PrimaryKey
+public class Bit implements Serializable {
+    
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -34,7 +29,7 @@ public class Bit extends RealmObject implements Serializable {
     private Integer orderNo;
     @SerializedName("bit_exercises")
     @Expose
-    private RealmList<BitExercise> bitExercises = new RealmList<BitExercise>();
+    private List<BitExercise> bitExercises = new ArrayList<>();
 
     private boolean finished;
 
@@ -133,7 +128,7 @@ public class Bit extends RealmObject implements Serializable {
      * @return
      * The bitExercises
      */
-    public RealmList<BitExercise> getBitExercises() {
+    public List<BitExercise> getBitExercises() {
         return bitExercises;
     }
 
@@ -142,7 +137,7 @@ public class Bit extends RealmObject implements Serializable {
      * @param bitExercises
      * The bit_exercises
      */
-    public void setBitExercises(RealmList<BitExercise> bitExercises) {
+    public void setBitExercises(List<BitExercise> bitExercises) {
         this.bitExercises = bitExercises;
     }
 
