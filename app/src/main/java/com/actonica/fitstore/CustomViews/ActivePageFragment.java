@@ -35,7 +35,7 @@ import retrofit2.Response;
 /**
  * Created by ilgar on 02.07.2016.
  */
-public class ItemFragment extends Fragment {
+public class ActivePageFragment extends Fragment {
 
     private int screenWidth;
     private int screenHeight;
@@ -48,6 +48,17 @@ public class ItemFragment extends Fragment {
     private TextView prod_nick;
     private Button trainButton;
     private ImageView more_btn;
+
+    private TextView new_no_trains;
+    private LinearLayout new_trains_count;
+    private TextView new_trains_total_dig;
+    private TextView new_trains_total_txt;
+
+    private TextView since_last_train;
+    private LinearLayout done_trains;
+    private TextView current_train_dig;
+    private TextView trains_total_dig;
+    private TextView trains_total_txt;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -74,6 +85,43 @@ public class ItemFragment extends Fragment {
         prod_nick = (TextView) linearLayout.findViewById(R.id.prod_nick);
         trainButton = (Button) linearLayout.findViewById(R.id.gotrain_button);
         more_btn = (ImageView) linearLayout.findViewById(R.id.more_button);
+
+        new_no_trains = (TextView)linearLayout.findViewById(R.id.new_no_trains);
+        new_trains_count = (LinearLayout)linearLayout.findViewById(R.id.new_trains_count);
+        new_trains_total_dig = (TextView)linearLayout.findViewById(R.id.new_trains_total_dig);
+        new_trains_total_txt = (TextView)linearLayout.findViewById(R.id.new_trains_total_txt);
+
+        since_last_train = (TextView)linearLayout.findViewById(R.id.since_last_train);
+        done_trains = (LinearLayout)linearLayout.findViewById(R.id.done_trains);
+        current_train_dig = (TextView)linearLayout.findViewById(R.id.current_train_dig);
+        trains_total_dig = (TextView)linearLayout.findViewById(R.id.trains_total_dig);
+        trains_total_txt = (TextView)linearLayout.findViewById(R.id.trains_total_txt);
+
+
+        if (program.getNext_training_id() ==  null) {
+            new_trains_count.setVisibility(View.VISIBLE);
+            new_no_trains.setVisibility(View.GONE);
+            new_trains_total_dig.setText(program.getTrainings().size() + "");
+            new_trains_total_txt.setText(program.getTrainingsTotal().substring(program.getTrainingsTotal().lastIndexOf(" ")+1));
+            new_trains_count.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new_trains_count.setVisibility(View.GONE);
+                    new_no_trains.setVisibility(View.VISIBLE);
+                }
+            });
+            new_no_trains.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new_trains_count.setVisibility(View.VISIBLE);
+                    new_no_trains.setVisibility(View.GONE);
+                }
+            });
+        }
+        else {
+            //TODO Handle trainings count/last train for used programs
+        }
+
 
         program_title.setText(program.getTitle());
         part_number.setText(program.getPartNo().toString());

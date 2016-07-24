@@ -9,9 +9,11 @@ import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.Adapters.ExtendedProgramsAdapter;
 import com.actonica.fitstore.ApiResponsesGson.GetFullProgramResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
+import com.actonica.fitstore.ApiResponsesGson.UserProgramsHistoryResponse;
 import com.actonica.fitstore.DividerItemDecoration;
 import com.actonica.fitstore.Downloader.Downloader;
 import com.actonica.fitstore.Models.Bit;
+import com.actonica.fitstore.Models.HistoryProgram;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.Models.Training;
 import com.actonica.fitstore.R;
@@ -44,7 +46,6 @@ public class UserInfoSyncer {
                                     if (response.isSuccessful() && response.body() != null) {
                                         Program fullProgram = response.body().program;
                                         fullProgram.setNext_training_id(prog.getNext_training_id());
-
                                         int i=0;
                                         for  (Training train : fullProgram.getTrainings())
                                         {
@@ -60,18 +61,11 @@ public class UserInfoSyncer {
                                             fullProgram.setLastUsedAt(prog.getUpdatedAt());
                                             i++;
                                         }
-
                                         /*Realm realm = Realm.getDefaultInstance();
                                         realm.beginTransaction();
                                         realm.copyToRealm(fullProgram);
                                         realm.commitTransaction();*/
-
-
                                         SharedPrefsHelper.saveProgram(fullProgram, ctx);
-
-
-                                        //TODO SAVE program to DB
-
                                         Downloader.getInstance(ctx).startDownload(fullProgram);
                                     }
                                 }
@@ -81,11 +75,6 @@ public class UserInfoSyncer {
                                     Toast.makeText(ctx, t.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
-
-
-
-
-
                         }
                     }
                 }
@@ -98,7 +87,20 @@ public class UserInfoSyncer {
         });
     }
 
-    public static void removeProgram(Context context){
+    public static void fillUserHistory(final Context context){
+        JuiceFitAPIHandler.getUserHistory(context, new Callback<UserProgramsHistoryResponse>() {
+            @Override
+            public void onResponse(Call<UserProgramsHistoryResponse> call, Response<UserProgramsHistoryResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<HistoryProgram> historyPrograms = response.body().historyPrograms;
+                    SharedPrefsHelper.saveRestoredHistory(historyPrograms, context);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<UserProgramsHistoryResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

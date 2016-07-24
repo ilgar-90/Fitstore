@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        if(intent.hasExtra("loadPrograms"))
-            UserInfoSyncer.fillActivePrograms(MainActivity.this);
+        if(intent.hasExtra("loadPrograms")) {
+            UserInfoSyncer.fillActivePrograms(getApplicationContext());
+            UserInfoSyncer.fillUserHistory(getApplicationContext());
+        }
 
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);

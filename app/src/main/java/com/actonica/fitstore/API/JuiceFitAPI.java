@@ -38,4 +38,7 @@ public interface JuiceFitAPI {
 
     @POST("/users/programs/{program_id}/start")
     Call<ProgramInteractionResponse> startProgram(@Path("program_id") int program_id, @Query("token") String token);
+
+    @GET("/users/programs/history")
+    Call<UserProgramsHistoryResponse> getUserHistory(@Query("token") String token);
 }

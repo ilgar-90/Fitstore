@@ -23,8 +23,119 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:padding="10dp">
+                android:layout_height="45dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp">
+
+
+
+
+                <TextView
+                    android:clickable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Тренировок ещё не было"
+                    android:id="@+id/new_no_trains"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:textSize="13dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/new_trains_count"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone">
+                    <TextView
+                        android:text="новая"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:id="@+id/new_trains_total_dig" />
+
+                        <TextView
+                            android:text="тренировки"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:id="@+id/new_trains_total_txt"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <TextView
+                    android:clickable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="последняя только что"
+                    android:id="@+id/since_last_train"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:textSize="13dp" />
+
+                <LinearLayout
+                    android:clickable="true"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/done_trains"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:text="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:id="@+id/current_train_dig" />
+
+                    <TextView
+                        android:text="из"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@android:color/black"
+                        android:text="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:id="@+id/trains_total_dig" />
+
+                    <TextView
+                        android:text="тренировки"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/trains_total_txt"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
 
 
                 <ImageView
@@ -33,16 +144,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/more_button"
                     android:layout_gravity="right|center_vertical"
-                    android:src="@drawable/ic_more" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Какой-то текст бла бла"
-                    android:id="@+id/textView4"
-                    android:layout_gravity="center" />
-
-
+                    android:src="@drawable/ic_more"
+                    android:layout_marginRight="5dp" />
             </FrameLayout>
 
             <ImageView
@@ -66,7 +169,8 @@
                     android:layout_height="wrap_content"
                     android:text="Program name"
                     android:id="@+id/program_title"
-                    android:textSize="22dp" />
+                    android:textSize="18dp"
+                    android:textColor="@android:color/black" />
 
                 <include
                     android:layout_width="wrap_content"

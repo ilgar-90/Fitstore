@@ -8,6 +8,7 @@ import com.actonica.fitstore.ApiResponsesGson.GetProducerProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
 import com.actonica.fitstore.ApiResponsesGson.RegisterUserResponse;
 import com.actonica.fitstore.ApiResponsesGson.ProgramInteractionResponse;
+import com.actonica.fitstore.ApiResponsesGson.UserProgramsHistoryResponse;
 import com.actonica.fitstore.ApiResponsesGson.VerifyUserResponse;
 import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 import com.google.gson.Gson;
@@ -170,6 +171,22 @@ public class JuiceFitAPIHandler {
         // prepare call in Retrofit 2.0
         JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
         Call<ProgramInteractionResponse> call = juiceFitAPI.startProgram(program_id, getToken(context));
+        //asynchronous call
+        call.enqueue(callback);
+    }
+
+    public static void getUserHistory(Context context, Callback<UserProgramsHistoryResponse> callback) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(apiServiceBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        // prepare call in Retrofit 2.0
+        JuiceFitAPI juiceFitAPI = retrofit.create(JuiceFitAPI.class);
+        Call<UserProgramsHistoryResponse> call = juiceFitAPI.getUserHistory(getToken(context));
         //asynchronous call
         call.enqueue(callback);
     }

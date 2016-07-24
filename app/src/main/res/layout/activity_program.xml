@@ -97,7 +97,7 @@
                             android:id="@+id/download_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Скачать"
+                            android:text="Загрузить"
                             android:layout_gravity="right|top" />
 
                         <TextView

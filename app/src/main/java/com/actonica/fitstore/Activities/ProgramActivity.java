@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.actonica.fitstore.API.JuiceFitAPIHandler;
 import com.actonica.fitstore.Adapters.ProgramsAdapter;
+import com.actonica.fitstore.ApiResponsesGson.GetFullProgramResponse;
 import com.actonica.fitstore.ApiResponsesGson.GetProgramsResponse;
 import com.actonica.fitstore.Downloader.Downloader;
+import com.actonica.fitstore.Helpers.SharedPrefsHelper;
 import com.actonica.fitstore.Helpers.UrlResolver;
 import com.actonica.fitstore.Models.Program;
 import com.actonica.fitstore.R;
@@ -89,7 +91,7 @@ public class ProgramActivity extends AppCompatActivity {
         trains_number.setText(program.getTrainingsTotal());
         description.setText(program.getDescription());
         schedule.setText(program.getPlan());
-        prog_size.setText(String.format("Объем %s Мб", ((double)(program.getZipFileSize()/1048576))).toString());
+        prog_size.setText(String.format("Объем %d Mb", program.getZipFileSize() / 1048576));
 
         related_rv = (RecyclerView)findViewById(R.id.related_programs_recycler_view);
 
@@ -103,13 +105,38 @@ public class ProgramActivity extends AppCompatActivity {
             }
         });
 
-        download_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Downloader.getInstance(ProgramActivity.this).startDownload(program);
-            }
-        });
 
+        if (SharedPrefsHelper.checkProgramDownloaded(program.getId(), getApplicationContext())){
+            download_button.setText("Перейти");
+            download_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO GO TO ACTIVE CARD
+                }
+            });
+        }
+        else {
+            download_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    JuiceFitAPIHandler.getFullProgram(program.getId(), getApplicationContext(), new Callback<GetFullProgramResponse>() {
+                        @Override
+                        public void onResponse(Call<GetFullProgramResponse> call, Response<GetFullProgramResponse> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                Program fullProgram = response.body().program;
+                                SharedPrefsHelper.saveProgram(fullProgram, getApplicationContext());
+                                Downloader.getInstance(getApplicationContext()).startDownload(fullProgram);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<GetFullProgramResponse> call, Throwable t) {
+                            Toast.makeText(ProgramActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+        }
 
         JuiceFitAPIHandler.getRelatedPrograms(program.getId().toString(), this, new Callback<GetProgramsResponse>() {
             @Override

@@ -91,4 +91,9 @@ public class ActiveFragment extends Fragment {
         }
         adapter.notifyDataSetChanged();
     }
+
+    public void addProgram(Program program){
+        savedPrograms.add(program);
+        adapter.notifyDataSetChanged();
+    }
 }

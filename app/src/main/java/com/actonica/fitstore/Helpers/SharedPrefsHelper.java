@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.actonica.fitstore.Models.HistoryProgram;
 import com.actonica.fitstore.Models.Program;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +21,7 @@ public class SharedPrefsHelper {
     private static final String PREFS_NAME = "JuiceFitPreferences";
     private static final String PREF_TOKEN = "saved_user_token";
     private static final String PREF_SAVED_PROGRAMS = "saved_user_programs";
+    private static final String HISTORY_PROGRAMS = "history_programs";
 
 
     public static void saveToken(String token, Context context) {
@@ -74,10 +76,44 @@ public class SharedPrefsHelper {
                 iter.remove();
             }
         }
-
         String resultToSave = gson.toJson(savedPrograms, listOfTestObject);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(PREF_SAVED_PROGRAMS, resultToSave);
         editor.commit();
+    }
+
+    public static boolean checkProgramDownloaded(int programId, Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedProgramsStr = sharedPref.getString(PREF_SAVED_PROGRAMS, null);
+        if (savedProgramsStr == null)
+            return false;
+        Gson gson = new Gson();
+        Type listOfTestObject = new TypeToken<List<Program>>(){}.getType();
+        List<Program> savedPrograms = gson.fromJson(savedProgramsStr, listOfTestObject);
+        for (Program program : savedPrograms){
+            if (program.getId() == programId)
+                return true;
+        }
+        return false;
+    }
+
+    public static void saveRestoredHistory(List<HistoryProgram> historyPrograms, Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        Type listOfTestObject = new TypeToken<List<HistoryProgram>>(){}.getType();
+        String resultToSave = gson.toJson(historyPrograms, listOfTestObject);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(HISTORY_PROGRAMS, resultToSave);
+        editor.commit();
+    }
+
+    public static List<HistoryProgram> getProgramsHistory(Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedProgramsStr = sharedPref.getString(HISTORY_PROGRAMS, null);
+        if (savedProgramsStr == null)
+            return null;
+        Gson gson = new Gson();
+        Type listOfTestObject = new TypeToken<List<HistoryProgram>>(){}.getType();
+        return gson.fromJson(savedProgramsStr, listOfTestObject);
     }
 }
