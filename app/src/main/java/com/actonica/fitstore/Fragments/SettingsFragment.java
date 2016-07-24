@@ -26,15 +26,6 @@ public class SettingsFragment extends Fragment {
     private TabLayout tabLayout;
     private Toolbar toolbar;
 
-    public static SettingsFragment newInstance() {
-        SettingsFragment fragment = new SettingsFragment();
-        return fragment;
-    }
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,8 +46,8 @@ public class SettingsFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(HistoryFragment.newInstance(), "History");
-        adapter.addFragment(InfoFragment.newInstance(), "Info");
+        adapter.addFragment(new HistoryFragment(), "History");
+        adapter.addFragment(new InfoFragment(), "Info");
         viewPager.setAdapter(adapter);
     }
 

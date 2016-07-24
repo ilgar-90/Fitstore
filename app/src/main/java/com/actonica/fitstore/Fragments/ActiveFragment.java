@@ -36,15 +36,6 @@ public class ActiveFragment extends Fragment {
     private LinearLayout active_programs;
     private LinearLayout empty_view;
 
-    public static ActiveFragment newInstance() {
-        ActiveFragment fragment = new ActiveFragment();
-        return fragment;
-    }
-
-    public ActiveFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +69,10 @@ public class ActiveFragment extends Fragment {
             indicator.setFillColor(Color.GRAY);
             indicator.setStrokeColor(Color.GRAY);
             pager.setOffscreenPageLimit(3);
+        }
+        else {
+            empty_view.setVisibility(View.VISIBLE);
+            active_programs.setVisibility(View.GONE);
         }
         return v;
     }

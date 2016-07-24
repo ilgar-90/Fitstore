@@ -23,14 +23,6 @@ public class HistoryFragment extends Fragment {
 
     private RecyclerView history_rv;
 
-    public static HistoryFragment newInstance() {
-        HistoryFragment fragment = new HistoryFragment();
-        return fragment;
-    }
-
-    public HistoryFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

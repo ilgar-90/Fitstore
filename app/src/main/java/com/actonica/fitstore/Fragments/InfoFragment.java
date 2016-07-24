@@ -12,14 +12,6 @@ import com.actonica.fitstore.R;
 
 
 public class InfoFragment extends Fragment {
-    public static InfoFragment newInstance() {
-        InfoFragment fragment = new InfoFragment();
-        return fragment;
-    }
-
-    public InfoFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
